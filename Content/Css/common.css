@@ -1,0 +1,50 @@
+html, body, .main {
+  height: 100%;
+}
+.main {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  background-color: lightblue;
+}
+.main .v-item {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.main .modes {
+  margin-top: 20px;
+}
+.main .values {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+  text-align: center;
+  font-size: 16px;
+}
+.main .number-of-groups {
+  width: 113px;
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+}
+.main .start-btn {
+  margin-top: 20px;
+}
+.main .results {
+  margin-top: 20px;
+  background-color: cadetblue;
+}
+.main .results .result-group {
+  margin: 10px;
+}
+.main .results .result-group li {
+  padding: 3px;
+}
+
+.tooltip .tooltip-inner {
+  background-color: tomato;
+}
+.tooltip .arrow::before {
+  border-right-color: tomato;
+}

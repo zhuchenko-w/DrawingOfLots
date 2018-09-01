@@ -1,0 +1,53 @@
+html, body, .main {
+  height: 100%;
+}
+
+.main {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  background-color: lightblue;
+  .v-item {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  .modes {
+    margin-top: 20px;
+  }
+  .values {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    text-align: center;
+    font-size: 16px;
+  }
+  .number-of-groups {
+    width: 113px;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+  }
+  .start-btn {
+    margin-top: 20px;
+  }
+  .results {
+    margin-top: 20px;
+    background-color: cadetblue;
+    .result-group {
+      margin: 10px;
+      li {
+        padding: 3px;
+      }
+    }
+  }
+}
+
+.tooltip {
+  .tooltip-inner {
+    background-color: tomato;
+  }
+  .arrow::before {
+    border-right-color: tomato;
+  }
+}
