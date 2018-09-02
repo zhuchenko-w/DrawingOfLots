@@ -1,11 +1,16 @@
-html, body, .main {
-  height: 100%;
+html{
+  min-height:100%;
+  position:relative;
+}
+body {
+  height:100%;
 }
 
 .main {
+  min-height: 100vh;
   text-align: center;
   padding-top: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   background-color: lightblue;
   .v-item {
     margin-top: 10px;
@@ -29,7 +34,7 @@ html, body, .main {
     float: none;
   }
   .start-btn {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .results {
     margin-top: 20px;
@@ -50,4 +55,64 @@ html, body, .main {
   .arrow::before {
     border-right-color: tomato;
   }
+}
+
+.custom-control{
+	&.switch{
+		--color: cadetblue;
+		padding-left: 0;
+
+		.switch-control-input{
+			display: none;
+
+			&:active~.switch-control-indicator{
+				&::after{
+					width: 20px;
+				}
+			}
+
+			&:checked{
+				~.switch-control-indicator{
+					border: 10px solid var(--color);
+
+					&::after{
+						top: -8px;
+						left: 4px;
+					}
+				}
+
+				&:active~.switch-control-indicator{
+					&::after{
+						left: 0px;
+					}
+				}
+			}
+		}
+		.switch-control-indicator{
+			display: inline-block;
+			position: relative;
+			margin: 0 10px;
+			top: 4px;
+			width: 32px;
+			height: 20px;
+			background: #fff;
+			border-radius: 16px;
+			transition: .3s;
+			border: 2px solid #ddd;
+
+			&::after{
+				content: '';
+				display: block;
+				position: absolute;
+				width: 16px;
+				height: 16px;
+				border-radius: 16px;
+				transition: .3s;
+				top: 0px;
+				left: 0px;
+				background: #fff;
+				box-shadow: 0 0 2px #aaa, 0 2px 5px #999;
+			}
+		}
+	}
 }

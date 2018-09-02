@@ -1,54 +1,117 @@
-﻿
-$(function(){
-  createNumberOfGroupsOptions();
+﻿var textAreaValueUpdating = false;
+var textAreaValueChanged = false;
 
-  $(".values").tooltip({
-    trigger: "manual",
-    placement: "right"
-  });
-  
+$(function(){
   $("#all-countries").on('change', function(){
     if($(this).is(":checked")) {
       showValues(AllCountries);
     }
   });
-  
   $("#all-states").on('change', function(){
     if($(this).is(":checked")){
       showValues(AllStates);      
     }
   });
-  
   $("#other").on('change', function(){
     if($(this).is(":checked")) {
       showValues(null); 
     }
   });
   
-  $(".values").on("change input", function(){
-    var text = $(this).val(); 
-    if(text == "") {
-      $(".lines-count").text("");
-    } else {
-      var lines = text.split(/\r|\r\n|\n/).filter(function(s){ return s !== ''; });
-      $(".lines-count").text("("+lines.length+") ");
-    }
-  });
-  
   $(".start-btn").click(draw);
   
+  $(".values").tooltip({
+    trigger: "manual",
+    placement: "right"
+  });
+  $(".values").on("change input", function(){
+    textAreaValueChanged = true;
+    updateFilterAndIndicator(!textAreaValueUpdating);
+  });  
+  $(".values").on("focusout", function(){
+    if(textAreaValueChanged) {
+      textAreaValueChanged = false;
+      updateFilterAndIndicator();
+    }
+  });
+
+  createNumberOfGroupsOptions();
+  initSelect2();
   showValues(AllCountries);
 });
 
+function updateFilterAndIndicator(indicatorOnly) {
+  var distinctValues = getDistinctValues();
+    
+  if(distinctValues.length == 0) {
+    if(!indicatorOnly) {
+      setFilter(null);
+    }
+    $(".lines-count").text("");
+  } else {    
+    if(!indicatorOnly) {
+      setFilter(distinctValues);
+    }
+    $(".lines-count").text("(" + distinctValues.length + ") ");
+  }
+}
+
+function initSelect2(){
+  $(".multiselect").select2({
+    language: "ru",
+    width: "300px",
+    allowClear: true,
+    multiple: true,
+    closeOnSelect: false,
+    dropdownCssClass: "multiselect-dropdown",
+    placeholder: "Все"
+  }).on("select2:close", function () { 
+    if($(this).val().length > 0) {
+      $(".values").prop("readonly", true);
+    } else {
+      $(".values").prop("readonly", false);
+    }
+    updateFilterAndIndicator(true);
+  });
+}
+
 function createNumberOfGroupsOptions() {
   var i = 1;
+  
   while(i++ < 11) {
     $(".number-of-groups").append($("<option value='" + i + "'" + (i == 4 ? "selected" : "") + ">" + i + " штук" + (i > 4 ? "" : "и") + "</option>"))
   }
 }
 
+function setFilter(distinctValues) {
+  $(".items-select option:not(.all-option)").remove();
+  
+  if(distinctValues != null) {
+    var html = "";
+    $.each(distinctValues, function(index, value) {
+      html += "<option value='" + value + "'>" + value + "</option>";
+    });
+
+    $(".items-select").append($(html));
+  }
+}
+
+function getDistinctValues() {
+  return $(".values").prop("readonly") 
+    ? $(".multiselect").val()
+    : distinct(
+        $(".values")
+          .val()
+          .split(/\r|\r\n|\n/)
+          .filter(function(s){ return s.replace(/\s/g, "") !== ""; }));
+}
+
 function showValues(values){
+  textAreaValueUpdating = true;
+  
   var textArea = $(".values");
+  
+  textArea.prop("readonly", false);
   if(values == null){
     textArea.val("").change();
     textArea.tooltip("show");
@@ -56,15 +119,17 @@ function showValues(values){
     textArea.val(values.join("\n")).change();
     textArea.tooltip("hide");
   }
+  
+  textAreaValueUpdating = false;
 }
 
 function draw() {
-  var values = $(".values").val().split("\n").filter(function(s){ return s !== ''; });
+  var distinctValues = getDistinctValues();
   var groupSize = parseInt($(".number-of-groups").val());
   var resultsDiv = $(".results");
   
-  shuffle(values);
-  var groups = split(values, groupSize);
+  shuffle(distinctValues);
+  var groups = split(distinctValues, groupSize);
   resultsDiv.html("");
   
   var i, j;
@@ -100,12 +165,24 @@ function split(values, groupSize){
     }
   
     if(result.length > 1 
+       && $(".concat-remainder").is(":checked")
        && result[result.length - 1].length < groupSize) {
       result[result.length - 2] = result[result.length - 2].concat(result[result.length - 1]);
       result.pop();
     }
     
     return result;
+}
+
+function distinct(values) {
+  var distinctValues = [];
+  $.each(values, function(index, value) {
+    var trimmedValue = $.trim(value);
+    if ($.inArray(trimmedValue, distinctValues) == -1) {
+      distinctValues.push(trimmedValue);
+    }
+  });
+  return distinctValues;
 }
 
 const AllStates = [
