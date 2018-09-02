@@ -20,10 +20,6 @@ $(function(){
   
   $(".start-btn").click(draw);
   
-  $(".values").tooltip({
-    trigger: "manual",
-    placement: "right"
-  });
   $(".values").on("change input", function(){
     textAreaValueChanged = true;
     updateFilterAndIndicator(!textAreaValueUpdating);
@@ -48,11 +44,13 @@ function updateFilterAndIndicator(indicatorOnly) {
       setFilter(null);
     }
     $(".lines-count").text("");
+    $(".start-btn").prop("disabled", true);
   } else {    
     if(!indicatorOnly) {
       setFilter(distinctValues);
     }
     $(".lines-count").text("(" + distinctValues.length + ") ");
+    $(".start-btn").prop("disabled", false);
   }
 }
 
@@ -114,10 +112,8 @@ function showValues(values){
   textArea.prop("readonly", false);
   if(values == null){
     textArea.val("").change();
-    textArea.tooltip("show");
   } else {
     textArea.val(values.join("\n")).change();
-    textArea.tooltip("hide");
   }
   
   textAreaValueUpdating = false;

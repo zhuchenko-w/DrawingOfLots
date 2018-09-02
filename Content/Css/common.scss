@@ -48,15 +48,6 @@ body {
   }
 }
 
-.tooltip {
-  .tooltip-inner {
-    background-color: tomato;
-  }
-  .arrow::before {
-    border-right-color: tomato;
-  }
-}
-
 .custom-control{
 	&.switch{
 		--color: cadetblue;
