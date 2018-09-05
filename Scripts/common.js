@@ -160,7 +160,19 @@ function indicateCopyToClipboardResult(selected, result) {
 }
 function fallbackCopyTextToClipboard(selected, text) {
   var textArea = document.createElement("textarea");
+
+	textArea.style.position = 'fixed';
+  textArea.style.top = 0;
+  textArea.style.left = 0;
+  textArea.style.width = '2em';
+  textArea.style.height = '2em';
+	textArea.style.padding = 0;
+  textArea.style.border = 'none';
+  textArea.style.outline = 'none';
+  textArea.style.boxShadow = 'none';
+  textArea.style.background = 'transparent';
   textArea.value = text;
+
   document.body.appendChild(textArea);
   textArea.focus();
   textArea.select();
@@ -176,7 +188,7 @@ function fallbackCopyTextToClipboard(selected, text) {
 }
 function copyTextToClipboard(selected, text) {
   if (!navigator.clipboard) {
-    fallbackCopyTextToClipboard(text);
+    fallbackCopyTextToClipboard(selected, text);
     return;
   }
   navigator.clipboard.writeText(text).then(function() {
