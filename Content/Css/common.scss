@@ -1,51 +1,150 @@
 html{
-  min-height:100%;
-  position:relative;
+	min-height:100%;
+	position:relative;
 }
 body {
-  height:100%;
+	height:100%;
 }
 
 .main {
-  min-height: 100vh;
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 15px;
-  background-color: lightblue;
-  .v-item {
-    margin-top: 10px;
-    margin-bottom: 0;
-  }
-  .modes {
-    margin-top: 20px;
-  }
-  .values {
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    float: none;
-    text-align: center;
-    font-size: 16px;
-  }
-  .number-of-groups {
-    width: 113px;
-    margin-left: auto;
-    margin-right: auto;
-    float: none;
-  }
-  .start-btn {
-    margin-top: 10px;
-  }
-  .results {
-    margin-top: 20px;
-    background-color: cadetblue;
-    .result-group {
-      margin: 10px;
-      li {
-        padding: 3px;
-      }
-    }
-  }
+	min-height: 100vh;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	background-color: lightblue;
+
+	.v-item {
+		margin-top: 10px;
+		margin-bottom: 0;
+	}
+
+	.modes {
+		margin-top: 20px;
+	}
+
+	.values {
+		width: 300px;
+		height: 200px;
+		margin-left: auto;
+		margin-right: auto;
+		float: none;
+		text-align: center;
+		font-size: 16px;
+	}
+
+	.number-of-groups {
+		width: 113px;
+		margin-left: auto;
+		margin-right: auto;
+		float: none;
+	}
+
+	.start-btn {
+		margin-top: 10px;
+	}
+
+	.results {
+		margin-top: 20px;
+		background-color: cadetblue;
+    position: relative;
+
+		.btn-copy-all {
+			position: absolute;
+	    font-size: 13px;
+	    top: -30px;
+	    height: 30px;
+	    width: 30px;
+	    border-radius: 0px 15px 0px 0;
+	    color: white;
+	    background-color: indigo;
+	    background-image: url(../Images/copy-all-icon.svg);
+	    background-position: center;
+	    background-size: contain;
+	    background-repeat: no-repeat;
+			opacity: 0.5;
+
+			&:hover {
+				opacity: 1;
+			}
+
+			&:focus {
+				box-shadow: none;
+			}
+		}
+		.btn-download-csv {
+			position: absolute;
+			font-size: 13px;
+			top: -30px;
+			left: 30px;
+			height: 30px;
+			width: 30px;
+			padding: 5px;
+			border-radius: 15px 15px 0px 0;
+			color: white;
+			background-color: green;
+			background-image: url(../Images/csv-icon.svg);
+			background-position: center 3px;
+			background-size: 25px;
+			background-repeat: no-repeat;
+			opacity: 0.5;
+
+			&:hover {
+				opacity: 1;
+			}
+
+			&:focus {
+				box-shadow: none;
+			}
+		}
+
+		.result-group {
+			padding: 10px 23px 10px 15px;
+			-webkit-transition: background-color 0.5s ease-out;
+		  -moz-transition: background-color 0.5s ease-out;
+		  -o-transition: background-color 0.5s ease-out;
+		  transition: background-color 0.5s ease-out;
+
+			&.copied {
+				background-color: lightgreen;
+			}
+
+			&.copy-error {
+				background-color: red;
+			}
+
+			li {
+				padding: 3px;
+
+				&.list-group-item:first-child {
+					border-radius: .25rem 0 0 0;
+				}
+			}
+
+			.btn-copy-group {
+				position: absolute;
+		    top: 10px;
+		    right: 0;
+		    width: 23px;
+		    height: 23px;
+		    padding: 0;
+		    background-color: indigo;
+		    background-image: url(../Images/copy-icon.svg);
+		    background-position: center;
+		    background-size: contain;
+		    background-repeat: no-repeat;
+		    border-radius: 0 23px 23px 0;
+				opacity: 0.5;
+
+				&:hover {
+					opacity: 1;
+				}
+
+				&:focus {
+					box-shadow: none;
+				}
+			}
+		}
+	}
 }
 
 .custom-control{
@@ -79,6 +178,7 @@ body {
 				}
 			}
 		}
+
 		.switch-control-indicator{
 			display: inline-block;
 			position: relative;
