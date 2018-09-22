@@ -50,7 +50,7 @@ $(function(){
 function initSelect2(){
 	$(".multiselect").select2({
 		language: "ru",
-		width: "300px",
+		width: "280px",
 		allowClear: true,
 		multiple: true,
 		closeOnSelect: false,
