@@ -213,7 +213,7 @@ function loadResults(key) {
 
 	$(".mode-label.active").removeClass("active");
 	$(".values-switch[data-list-name='other']").prop('checked', true).change().closest(".mode-label").addClass("active");
-	showValues(data.values);
+	showValues(data.values.sort());
 	showResults(data.groups);
 }
 function removeAllSavedResults() {
