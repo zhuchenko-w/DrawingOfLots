@@ -1,83 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+  <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="shortcut icon" href="Content/Images/toss-coin.png")" type="image/x-icon"/>
-	
-	<script src="Scripts/fallback.min.js"></script>
-	
+	<link rel="shortcut icon" href="Content/Images/toss-coin.png" type="image/x-icon"/>
+
+	<script src="Scripts/app/common/fallbackToLocalSources.min.js"></script>
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" onerror="fallbackToLocalStylsheet('Content/Css/bootstrap/bootstrap.min.css')">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" onerror="fallbackToLocalStylsheet('Content/Css/select2/select2.min.css')"/>
-	
-	<link rel="stylesheet" href="Content/Css/common.min.css" class="app-style">
-	
+
+	<link rel="stylesheet" href="Content/Css/app/common.min.css" class="app-style">
+  <link rel="stylesheet" href="Content/Css/app/loader.min.css" class="app-style">
+
 	<title>Жеребьевка</title>
 </head>
 <body>
 	<div class="container main">
-	  
+
 	  <p class="v-item">Распределить</p>
-	  
+
 	  <div class="v-item btn-group btn-group-toggle modes" data-toggle="buttons">
-		<label class="btn btn-secondary active">
-		  <input type="radio" id="all-countries" autocomplete="off" checked>
+		<label class="btn btn-secondary mode-label active">
+		  <input type="radio" class="values-switch" autocomplete="off" data-list-name="allCountries" checked>
 		  все страны
 		</label>
-		<label class="btn btn-secondary">
-		  <input type="radio" id="all-states" autocomplete="off"> 
+		<label class="btn btn-secondary mode-label">
+		  <input type="radio" class="values-switch" autocomplete="off" data-list-name="allStates">
 		  все штаты
 		</label>
-		<label class="btn btn-secondary">
-		  <input type="radio" id="other" autocomplete="off"> 
+		<label class="btn btn-secondary mode-label">
+		  <input type="radio" class="values-switch" autocomplete="off" data-list-name="other">
 		  другое
 		</label>
 	  </div>
-	  
+
 	  <div class="v-item">
-		<select class="items-select multiselect">
-		</select>
+  		<select class="items-select multiselect">
+  		</select>
 	  </div>
 	  <textarea class="v-item form-control values" rows="10" data-toggle="tooltip" placeholder="Введи сюда элементы для жеребьевки - по одному на строку"></textarea>
-	  
+
 	  <p class="v-item">
-		<span class="lines-count"></span>
-		на группы по
+  		<span class="lines-count"></span>
+  		на группы по
 	  </p>
 	  <select class="v-item form-control number-of-groups"></select>
-	  
+
 	  <p class="v-item">
-		Неполную группу добавить к последней?
+		    Неполную группу добавить к последней?
 	  </p>
 	  <label class="v-item custom-control switch">
-		<span class="switch-control-description">Нет</span>
-		<input type="checkbox" class="switch-control-input concat-remainder" checked>
-		<span class="switch-control-indicator"></span>
-		<span class="switch-control-description">Да</span>
+  		<span class="switch-control-description">Нет</span>
+  		<input type="checkbox" class="switch-control-input concat-remainder" checked>
+  		<span class="switch-control-indicator"></span>
+  		<span class="switch-control-description">Да</span>
 	  </label>
-	  
-	  <div class="v-item buttons">
-		<button type="button" class="btn btn-warning start-btn">Впирёооот!</button>
+
+	  <div class="v-item buttons row">
+		    <button type="button" class="btn btn-warning col start-btn">Впирёооот!</button>
+        <div class="dropdown col saved-results-dropdown">
+          <button class="btn btn-secondary dropdown-toggle saved-results-dropdown-btn" type="button" id="savedResultsDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Загрузить
+          </button>
+          <div class="dropdown-menu saved-results-menu" aria-labelledby="savedResultsDropdownMenuButton"></div>
+        </div>
 	  </div>
-	  
+
 	  <div class="v-item results row"></div>
 	</div>
-	
+
+  <div class="loader-wrap">
+    <div class="loader"></div>
+  </div>
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"  crossorigin="anonymous"></script>
 	<script>window.jQuery || document.write("<script src='Scripts/jquery/jquery-3.2.1.min.js'>\x3C/script>")</script>
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script>window.Popper || document.write("<script src='Scripts/bootstrap/popper-1.12.9.umd.min.js'>\x3C/script>")</script>
-	
+
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script>$.fn.modal || document.write("<script src='Scripts/bootstrap/bootstrap-4.0.0.min.js'>\x3C/script>")</script>
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 	<script>$.fn.select2 || document.write("<script src='Scripts/select2/select2-4.0.5.full.min.js'>\x3C/script>")</script>
-	
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/i18n/ru.js"></script>
 	<script>$.fn.select2 || document.write("<script src='Scripts/select2/i18n/ru.js'>\x3C/script>")</script>
-	
-	<script src="Scripts/common.min.js"></script>
+
+  <script src="Scripts/app/common/constants.min.js"></script>
+  <script src="Scripts/app/common/defaultValueLists.min.js"></script>
+  <script src="Scripts/app/common/extensions.min.js"></script>
+  <script src="Scripts/app/helpers/commonHelper.min.js"></script>
+  <script src="Scripts/app/helpers/clipboardHelper.min.js"></script>
+  <script src="Scripts/app/helpers/dataStorageHelper.min.js"></script>
+	<script src="Scripts/app/app.min.js"></script>
 </body>
 </html>

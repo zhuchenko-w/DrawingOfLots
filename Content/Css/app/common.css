@@ -41,8 +41,48 @@ body {
 	float: none;
 }
 
-.main .start-btn {
-	margin-top: 10px;
+.main .buttons {
+	margin: 20px auto 0 auto;
+	width: 280px;
+	float: none;
+}
+
+.main .buttons .saved-results-dropdown {
+	display: none;
+	padding-right: 0;
+}
+
+.main .buttons .saved-results-dropdown .saved-results-dropdown-btn {
+	width: 100%;
+}
+
+.main .buttons .saved-results-dropdown .saved-results-menu {
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+.main .buttons .saved-results-dropdown .saved-results-menu .saved-results-menu-item {
+	padding-right: 40px;
+	padding-left: 10px;
+	cursor: pointer;
+}
+
+.main .buttons .saved-results-dropdown .saved-results-menu .saved-results-menu-item:active {
+	background-color: #6c757d;
+	color: #fff;
+}
+
+.main .buttons .saved-results-dropdown .saved-results-menu .remove-saved-result-btn {
+	position: absolute;
+	right: 10px;
+	margin-top: -27px;
+	float: right;
+	height: 23px;
+	width: 25px;
+	background-image: url(../../Images/remove-icon.svg);
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 
 .main .results {
@@ -60,7 +100,7 @@ body {
 	border-radius: 0px 15px 0px 0;
 	color: white;
 	background-color: indigo;
-	background-image: url(../Images/copy-all-icon.svg);
+	background-image: url(../../Images/copy-all-icon.svg);
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -86,7 +126,7 @@ body {
 	border-radius: 15px 15px 0px 0;
 	color: white;
 	background-color: green;
-	background-image: url(../Images/csv-icon.svg);
+	background-image: url(../../Images/csv-icon.svg);
 	background-position: center 3px;
 	background-size: 25px;
 	background-repeat: no-repeat;
@@ -133,7 +173,7 @@ body {
 	height: 23px;
 	padding: 0;
 	background-color: indigo;
-	background-image: url(../Images/copy-icon.svg);
+	background-image: url(../../Images/copy-icon.svg);
 	background-position: center;
 	background-size: contain;
 	background-repeat: no-repeat;
