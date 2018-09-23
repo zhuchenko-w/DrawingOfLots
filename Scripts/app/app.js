@@ -141,6 +141,14 @@ function getDistinctValues() {
 					.split(/\r|\r\n|\n/)
 					.filter(function(s){ return s.replace(/\s/g, "") !== ""; }));
 }
+function getValues() {
+	return $(".values").prop("readonly")
+		? $(".multiselect").val()
+		: $(".values")
+			.val()
+			.split(/\r|\r\n|\n/)
+			.filter(function(s){ return s.replace(/\s/g, "") !== ""; });
+}
 function showValues(values){
 	textAreaValueUpdating = true;
 
@@ -244,7 +252,7 @@ function draw() {
 
 	CommonHelper.ShuffleArray(distinctValues);
 	var groups = CommonHelper.SplitIntoGroups(distinctValues, groupSize);
-	saveResults(groups, distinctValues);
+	saveResults(groups, getValues());
 	showResults(groups);
 }
 function showResults(groups) {
