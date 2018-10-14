@@ -7,12 +7,33 @@ body {
 	height: 100%;
 }
 
+@media (min-width: 768px) {
+	.main {
+		background-image: url(../../Images/Backgrounds/cat-left.png), url(../../Images/Backgrounds/cat-right.png);
+		background-position: top 220px left 20px, top 30px right 20px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: 992px) {
+	.main {
+		background-position: top 30px left 70px, top 220px right 70px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.main {
+		background-position: top 220px left 110px, top 30px right 110px;
+	}
+}
+
 .main {
 	min-height: 100vh;
 	text-align: center;
 	padding-top: 10px;
 	padding-bottom: 15px;
 	background-color: lightblue;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .main .v-item {
@@ -157,11 +178,15 @@ body {
 	background-color: red;
 }
 
-.main .results .result-group li {
+.main .results .result-group ul.list-group {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.main .results .result-group ul.list-group li {
 	padding: 3px;
 }
 
-.main .results .result-group li.list-group-item:first-child {
+.main .results .result-group ul.list-group li.list-group-item:first-child {
 	border-radius: .25rem 0 0 0;
 }
 
@@ -179,6 +204,7 @@ body {
 	background-repeat: no-repeat;
 	border-radius: 0 23px 23px 0;
 	opacity: 0.5;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .main .results .result-group .btn-copy-group:hover {
@@ -192,6 +218,8 @@ body {
 .custom-control.switch {
 	--color: cadetblue;
 	padding-left: 0;
+	margin: 10px auto;
+	width: 110px;
 }
 
 .custom-control.switch .switch-control-input {

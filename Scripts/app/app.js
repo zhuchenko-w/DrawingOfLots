@@ -2,7 +2,11 @@ var textAreaValueUpdating = false;
 var textAreaValueChanged = false;
 
 $(function(){
-	$(".values-switch").on('change', function(){
+	window.addEventListener("resize", function(){
+		setBackground();
+	}, true);
+
+	$(".values-switch").on("change", function(){
 		var element = $(this);
 		if(element.is(":checked")) {
 			showValues(valueLists[element.data("list-name")]);
@@ -50,6 +54,7 @@ $(function(){
 		}
 	});
 
+	setBackground();
 	fillPreviousResultsMenu();
 	createNumberOfGroupsOptions();
 	initSelect2();
@@ -98,6 +103,10 @@ function initSelect2(){
 		}
 		updateFilterAndIndicator(true);
 	});
+}
+function setBackground() {
+	$(".results").attr("style", BackgroundBuilder.GetBackgroundCss(".results", 240, BackgroundBuilder.Modes.Bananas));
+	$("body").attr("style", BackgroundBuilder.GetBackgroundCss("body", 240, BackgroundBuilder.Modes.Stickers, true));
 }
 
 // filtering
@@ -241,8 +250,7 @@ function removeSavedResult(element, key) {
 	DataStorageHelper.SaveLocal(ResultsKeysKey, keys);
 	DataStorageHelper.RemoveLocal(key);
 
-	element.prev().remove();
-	element.remove();
+	fillPreviousResultsMenu();
 }
 
 // drawing
@@ -274,4 +282,5 @@ function showResults(groups) {
 	}
 
 	resultsDiv.html(html);
+	setBackground();
 }
