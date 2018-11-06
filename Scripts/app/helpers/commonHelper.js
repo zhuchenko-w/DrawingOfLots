@@ -3,6 +3,10 @@ var CommonHelper = {
 	    return [date.getDate().padLeft(), (date.getMonth() + 1).padLeft(), date.getFullYear()].join(".") +
 	            (withTime ? " " + [date.getHours().padLeft(), date.getMinutes().padLeft(), date.getSeconds().padLeft(), date.getMilliseconds().padLeft()].join(":") : "");
 	},
+	ParseDate: function(dateString) {
+		var parts = dateString.split(/[\s\.:]+/);
+		return new Date(parts[2], parts[1] - 1, parts[0], parts[3], parts[4], parts[5], parts[6]);
+	},
 	RemoveFromArray: function(arr, item) {
 		var index = $.inArray(item, arr);
 		if (index !== -1) arr.splice(index, 1);

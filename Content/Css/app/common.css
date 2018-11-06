@@ -9,7 +9,7 @@ body {
 
 @media (min-width: 768px) {
 	.main {
-		background-image: url(../../Images/Backgrounds/cat-left.png), url(../../Images/Backgrounds/cat-right.png);
+		background-image: url(../../Images/Backgrounds/cat-left-1.png), url(../../Images/Backgrounds/cat-right-2.png);
 		background-position: top 220px left 20px, top 30px right 20px;
 		background-repeat: no-repeat;
 	}
@@ -39,6 +39,10 @@ body {
 .main .v-item {
 	margin-top: 10px;
 	margin-bottom: 0;
+}
+
+.main .marginless {
+	margin: 0 auto;
 }
 
 .main .modes {

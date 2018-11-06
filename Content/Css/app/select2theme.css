@@ -1,0 +1,21 @@
+.values-filter-container .select2-container--default .select2-selection--multiple .select2-selection__choice {
+	background-color: lightgreen;
+	border-color: lightgreen;
+}
+
+.values-filter-container .select2-container--default .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+	color: #f75454;
+}
+
+.values-exclude-filter-container .select2-container--default .select2-selection--multiple .select2-selection__choice {
+	background-color: #f75454;
+	border-color: #f75454;
+}
+
+.values-exclude-filter-container .select2-container--default .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+	color: lightgreen;
+}
+
+.select2-selection__clear {
+	color: #67bcf7;
+}

@@ -5,7 +5,7 @@ var BackgroundBuilder = {
 
 		switch(mode) {
 			case this.Modes.Stickers:
-				for (var i = 1; i <= 19; i++) {
+				for (var i = 1; i <= 32; i++) {
 					images.push(i + ".png");
 				}
 				break;
@@ -24,6 +24,7 @@ var BackgroundBuilder = {
 
 		var urls = [];
 		var positions = [];
+		var sizes = [];
 		var element = $(selector);
 		var maxHeight = element.outerHeight();
 		var maxWidth = element.outerWidth();
@@ -40,7 +41,7 @@ var BackgroundBuilder = {
 			} else {
 				positions.push("top " + top + "px left " + left + "px");
 				urls.push("url(Content/Images/Backgrounds/" + images[i] + ")");
-
+				sizes.push("240px");
 				if(++i == images.length) {
 						CommonHelper.ShuffleArray(images);
 						i = 0;
@@ -54,8 +55,9 @@ var BackgroundBuilder = {
 			"background-repeat: no-repeat; " +
 			(setRandomBackgroundColor ? "background-color: " + getRandomColor() + ";" : "") +
 			"background-blend-mode: " + backgroundBlendMode + "; " +
-			"background-image: " + urls.join(",") +
-			"; background-position: " +	positions.join(",") + ";";
+			"background-image: " + urls.join(",") + "; " +
+			"background-position: " +	positions.join(",") + "; " +
+			"background-size: " + sizes.join(",") + ";";
 	},
 	Modes: {
 		Stickers: 0,

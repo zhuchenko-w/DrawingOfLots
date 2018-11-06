@@ -57,7 +57,7 @@ $(function(){
 	setBackground();
 	fillPreviousResultsMenu();
 	createNumberOfGroupsOptions();
-	initSelect2();
+	initSelect2Filters();
 	showValues(valueLists["allCountries"]);
 });
 
@@ -65,13 +65,15 @@ $(function(){
 function createNumberOfGroupsOptions() {
 	var i = 1;
 
-	while(i++ < 11) {
+	while(i++ < 10) {
 		$(".number-of-groups").append($("<option value='" + i + "'" + (i == 4 ? "selected" : "") + ">" + i + " штук" + (i > 4 ? "" : "и") + "</option>"))
 	}
 }
 function fillPreviousResultsMenu() {
 	var keys = DataStorageHelper.ReadLocal(ResultsKeysKey);
 	if(keys && keys.length > 0) {
+		sortSavedResultsKeysDesc(keys);
+
 		var html = "";
 
 		$.each(keys, function(index, key) {
@@ -86,7 +88,7 @@ function fillPreviousResultsMenu() {
 		$(".saved-results-dropdown").hide();
 	}
 }
-function initSelect2(){
+function initSelect2Filters(){
 	$(".multiselect").select2({
 		language: "ru",
 		width: "280px",
@@ -94,9 +96,11 @@ function initSelect2(){
 		multiple: true,
 		closeOnSelect: false,
 		dropdownCssClass: "multiselect-dropdown",
-		placeholder: "Все"
+		placeholder: function() {
+        $(this).data('placeholder');
+    }
 	}).on("select2:close", function () {
-		if($(this).val().length > 0) {
+		if($(".items-select").val().length > 0 || $(".excluded-items-select").val() > 0) {
 			$(".values").prop("readonly", true);
 		} else {
 			$(".values").prop("readonly", false);
@@ -116,19 +120,23 @@ function updateFilterAndIndicator(indicatorOnly) {
 	if(distinctValues.length == 0) {
 		if(!indicatorOnly) {
 			setFilter(null);
+			setFilter(null, true);
 		}
 		$(".lines-count").text("");
 		$(".start-btn").prop("disabled", true);
 	} else {
 		if(!indicatorOnly) {
 			setFilter(distinctValues);
+			setFilter(distinctValues, true);
 		}
 		$(".lines-count").text("(" + distinctValues.length + ") ");
 		$(".start-btn").prop("disabled", false);
 	}
 }
-function setFilter(distinctValues) {
-	$(".items-select option:not(.all-option)").remove();
+function setFilter(distinctValues, excluded) {
+	var filterSelector = "." + (excluded ? "excluded-" : "") + "items-select";
+
+	$(filterSelector + " option:not(.all-option)").remove();
 
 	if(distinctValues != null) {
 		var html = "";
@@ -136,27 +144,38 @@ function setFilter(distinctValues) {
 			html += "<option value='" + value + "'>" + value + "</option>";
 		});
 
-		$(".items-select").append($(html));
+		$(filterSelector).append($(html));
 	}
 }
 
 // values
 function getDistinctValues() {
 	return $(".values").prop("readonly")
-		? $(".multiselect").val()
-		: CommonHelper.Distinct(
-				$(".values")
-					.val()
-					.split(/\r|\r\n|\n/)
-					.filter(function(s){ return s.replace(/\s/g, "") !== ""; }));
+		? getValuesFromFilters()
+		: CommonHelper.Distinct(getValuesFromTextArea());
 }
 function getValues() {
 	return $(".values").prop("readonly")
-		? $(".multiselect").val()
-		: $(".values")
-			.val()
-			.split(/\r|\r\n|\n/)
-			.filter(function(s){ return s.replace(/\s/g, "") !== ""; });
+		? getValuesFromFilters()
+		: getValuesFromTextArea();
+}
+function getValuesFromFilters() {
+	var values = $(".items-select").val();
+	var excluded = $(".excluded-items-select").val();
+
+	if(values.length == 0) {
+		values = CommonHelper.Distinct(getValuesFromTextArea());
+	}
+
+	return values.filter(function(item) {
+	  return excluded.indexOf(item) == -1;
+	});
+}
+function getValuesFromTextArea() {
+	return $(".values")
+		.val()
+		.split(/\r|\r\n|\n/)
+		.filter(function(s){ return s.replace(/\s/g, "") !== ""; });
 }
 function showValues(values){
 	textAreaValueUpdating = true;
@@ -222,6 +241,13 @@ function saveResults(groups, values) {
 
 	keys.push(key);
 	DataStorageHelper.SaveLocal(key, { values: values, groups: groups });
+
+	if(keys.length > MaxSavedResultsCount) {
+		sortSavedResultsKeysDesc(keys);
+		var oldestKey = keys.pop();
+		DataStorageHelper.RemoveLocal(oldestKey);
+	}
+
 	DataStorageHelper.SaveLocal(ResultsKeysKey, keys);
 	fillPreviousResultsMenu();
 }
@@ -251,6 +277,19 @@ function removeSavedResult(element, key) {
 	DataStorageHelper.RemoveLocal(key);
 
 	fillPreviousResultsMenu();
+}
+function sortSavedResultsKeysDesc(keys) {
+	if(keys && keys.length > 0) {
+		keys.sort(function(x, y) {
+		  if (CommonHelper.ParseDate(x) < CommonHelper.ParseDate(y)) {
+		    return 1;
+		  }
+		  if (CommonHelper.ParseDate(x) > CommonHelper.ParseDate(y)) {
+		    return -1;
+		  }
+		  return 0;
+		});
+	}
 }
 
 // drawing
