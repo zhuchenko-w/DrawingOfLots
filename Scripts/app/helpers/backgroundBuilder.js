@@ -24,7 +24,6 @@ var BackgroundBuilder = {
 
 		var urls = [];
 		var positions = [];
-		var sizes = [];
 		var element = $(selector);
 		var maxHeight = element.outerHeight();
 		var maxWidth = element.outerWidth();
@@ -41,7 +40,7 @@ var BackgroundBuilder = {
 			} else {
 				positions.push("top " + top + "px left " + left + "px");
 				urls.push("url(Content/Images/Backgrounds/" + images[i] + ")");
-				sizes.push("240px");
+
 				if(++i == images.length) {
 						CommonHelper.ShuffleArray(images);
 						i = 0;
@@ -56,8 +55,7 @@ var BackgroundBuilder = {
 			(setRandomBackgroundColor ? "background-color: " + getRandomColor() + ";" : "") +
 			"background-blend-mode: " + backgroundBlendMode + "; " +
 			"background-image: " + urls.join(",") + "; " +
-			"background-position: " +	positions.join(",") + "; " +
-			"background-size: " + sizes.join(",") + ";";
+			"background-position: " +	positions.join(",") + ";";
 	},
 	Modes: {
 		Stickers: 0,
