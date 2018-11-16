@@ -100,7 +100,7 @@ function initSelect2Filters(){
         $(this).data('placeholder');
     }
 	}).on("select2:close", function () {
-		if($(".items-select").val().length > 0 || $(".excluded-items-select").val() > 0) {
+		if($(".items-select").val().length > 0 || $(".excluded-items-select").val().length > 0) {
 			$(".values").prop("readonly", true);
 		} else {
 			$(".values").prop("readonly", false);
