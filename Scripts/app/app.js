@@ -111,6 +111,8 @@ function initSelect2Filters(){
 function setBackground() {
 	$(".results").attr("style", BackgroundBuilder.GetBackgroundCss(".results", 240, BackgroundBuilder.Modes.Bananas));
 	$("body").attr("style", BackgroundBuilder.GetBackgroundCss("body", 240, BackgroundBuilder.Modes.Stickers, true));
+	$(".cat-left").attr("src", BackgroundBuilder.GetRandomSideCatImgUrl());
+	$(".cat-right").attr("src", BackgroundBuilder.GetRandomSideCatImgUrl());
 }
 
 // filtering
@@ -322,4 +324,7 @@ function showResults(groups) {
 
 	resultsDiv.html(html);
 	setBackground();
+	$('html, body').animate({
+        scrollTop: $(".results").offset().top - 30
+    }, 1000);
 }

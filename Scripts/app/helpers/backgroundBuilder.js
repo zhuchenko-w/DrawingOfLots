@@ -57,6 +57,9 @@ var BackgroundBuilder = {
 			"background-image: " + urls.join(",") + "; " +
 			"background-position: " +	positions.join(",") + ";";
 	},
+	GetRandomSideCatImgUrl: function() {
+		return "Content/Images/Backgrounds/SideCats/" + randomInteger(1, 4) + ".png";
+	},
 	Modes: {
 		Stickers: 0,
 		Bananas: 1,
@@ -71,4 +74,10 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+function randomInteger(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

@@ -7,23 +7,60 @@ body {
 	height: 100%;
 }
 
+@media (max-width: 920px) {
+	.main {
+		width: 100%;
+	}
+	.main .cat-img {
+		display: none;
+	}
+}
+
 @media (min-width: 768px) {
 	.main {
-		background-image: url(../../Images/Backgrounds/cat-left-1.png), url(../../Images/Backgrounds/cat-right-2.png);
-		background-position: top 220px left 20px, top 30px right 20px;
-		background-repeat: no-repeat;
+		width: 70%;
+	}
+	.main .cat-img.cat-left {
+		left: calc(30% - 120px);
+		left: -webkit-calc(30% - 120px);
+		left: -moz-calc(30% - 120px);
+	}
+	.main .cat-img.cat-right {
+		right: calc(30% - 120px);
+		right: -webkit-calc(30% - 120px);
+		right: -moz-calc(30% - 120px);
 	}
 }
 
 @media (min-width: 992px) {
 	.main {
-		background-position: top 30px left 70px, top 220px right 70px;
+		width: 60%;
+	}
+	.main .cat-img.cat-left {
+		left: calc(40% - 200px);
+		left: -webkit-calc(40% - 200px);
+		left: -moz-calc(40% - 200px);
+	}
+	.main .cat-img.cat-right {
+		right: calc(40% - 200px);
+		right: -webkit-calc(40% - 200px);
+		right: -moz-calc(40% - 200px);
 	}
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1260px) {
 	.main {
-		background-position: top 220px left 110px, top 30px right 110px;
+		width: 60%;
+	}
+	.main .cat-img.cat-left {
+		left: calc(40% - 215px);
+		left: -webkit-calc(40% - 215px);
+		left: -moz-calc(40% - 215px);
+	}
+	.main .cat-img.cat-right {
+		right: calc(40% - 215px);
+		right: -webkit-calc(40% - 215px);
+		right: -moz-calc(40% - 215px);
 	}
 }
 
@@ -36,6 +73,11 @@ body {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.main .cat-img {
+	position: absolute;
+	top: 140px;
+}
+
 .main .v-item {
 	margin-top: 10px;
 	margin-bottom: 0;
@@ -43,10 +85,6 @@ body {
 
 .main .marginless {
 	margin: 0 auto;
-}
-
-.main .modes {
-	margin-top: 20px;
 }
 
 .main .values {
@@ -67,7 +105,7 @@ body {
 }
 
 .main .buttons {
-	margin: 20px auto 0 auto;
+	margin: 16px auto 0 auto;
 	width: 280px;
 	float: none;
 }
@@ -111,7 +149,7 @@ body {
 }
 
 .main .results {
-	margin-top: 20px;
+	margin-top: 30px;
 	background-color: cadetblue;
 	position: relative;
 }
